@@ -36,11 +36,11 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
     return TextFormField(
       style: AppTextStyles.fBlack16_500,
       obscureText:
-          widget.inputType == InputTypes.password ? _obscureText : false,
+          widget.inputType == InputTypes.phone ? _obscureText : false,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       keyboardType: TextInputType.text,
       validator: (value) {
-        if (widget.inputType == InputTypes.password) {
+        if (widget.inputType == InputTypes.phone) {
           return AuthHelpers().validatePassword(value ?? '');
         }
         if (widget.inputType == InputTypes.username) {
@@ -57,7 +57,7 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
             widget.prefixIcon,
             color: AppColors.grey,
           ),
-          suffixIcon: widget.inputType == InputTypes.password
+          suffixIcon: widget.inputType == InputTypes.phone
               ? GestureDetector(
                   onTap: () {
                     _viewPass();
@@ -69,36 +69,37 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
                   ),
                 )
               : null,
+              
           contentPadding:
               const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
           hintText: widget.hintText,
           focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(28),
+              borderRadius: BorderRadius.circular(10),
               borderSide: const BorderSide(
                 color: AppColors.grey,
               )),
           enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(28),
+              borderRadius: BorderRadius.circular(10),
               borderSide: const BorderSide(
                 color: AppColors.grey,
               )),
           errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(28),
+              borderRadius: BorderRadius.circular(10),
               borderSide: const BorderSide(
                 color: AppColors.lightRed,
               )),
           focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(28),
+              borderRadius: BorderRadius.circular(10),
               borderSide: const BorderSide(
                 color: AppColors.lightRed,
               )),
           filled: true,
           fillColor: AppColors.white,
           border: OutlineInputBorder(
-              borderSide: const BorderSide(color: AppColors.white, width: 1.0),
-              borderRadius: BorderRadius.circular(12))),
+              borderSide: const BorderSide(color: AppColors.white, width: .5),
+              borderRadius: BorderRadius.circular(10))),
     );
   }
 }
 
-enum InputTypes { username, password }
+enum InputTypes { username, email ,phone ,remarks,gender,visitedDate,purpose,visitedTime}

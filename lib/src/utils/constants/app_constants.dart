@@ -1,11 +1,19 @@
 class StringConstants {
-  static const String username = "Username";
-  static const String password = "Password";
-  static const String usernameError = "Username Required";
-  static const String passworderror = "Password Required";
-  static const String forgotPassword = "Forgot Password";
-  static const String welcomeBack = "Welcome Back!";
-  static const String buttonText = "Login";
-  static const String noAccount = "Don't have an account? ";
-  static const String signUp = "Sign Up";
+  static const String name = "Name";
+  static const String email = "Email";
+   static const String phone = "Phone";
+   static const String remarks = "Remarks";
+   static const String gender = "Gender";
+static const String   visitedDate = "Date";
+static const String   visitedTime = "Time";
+static const String purpose ="Purpose";
+  static const String usernameError = "Name Required";
+  static const String timeError = "Time Required";
+  static const String phoneError = "Phone Required";
+   static const String dateError = "Date Required";
+    static const String genderError = "Gender Required";
+    static const String purposeError = "Purpose Required";
+
+  static const String buttonText = "Create";
+ 
 }

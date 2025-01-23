@@ -24,7 +24,7 @@ class PrimaryButton extends StatelessWidget {
         width: double.infinity,
         padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
         decoration: BoxDecoration(
-          color: AppColors.lightRed,
+          color: const Color.fromARGB(255, 231, 177, 15),
           borderRadius: BorderRadius.circular(84),
         ),
         child: isLoading
@@ -35,13 +35,13 @@ class PrimaryButton extends StatelessWidget {
             : Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(title, style: AppTextStyles.fWhite18_500),
+                  Text(title, style: AppTextStyles.fBlack16_500),
                   const SizedBox(
                     width: 8,
                   ),
                   const Icon(
                     Icons.arrow_right_alt_rounded,
-                    color: AppColors.white,
+                    color: AppColors.black,
                   )
                 ],
               ),
