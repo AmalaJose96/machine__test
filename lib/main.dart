@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:machine_test/src/features/login/data/repositories/home_repository_impl.dart';
 import 'package:machine_test/src/features/login/presentation/bloc/login_bloc.dart';
 import 'package:machine_test/src/features/login/presentation/pages/home.dart';
-import 'package:machine_test/src/features/login/presentation/pages/login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,7 +23,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
             useMaterial3: true,
           ),
-          home: RegisterPage()),
+          home: const RegisterPage()),
     );
   }
 }

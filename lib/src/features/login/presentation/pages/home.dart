@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/animation.dart';
 import 'package:machine_test/src/features/login/presentation/pages/login.dart';
 
 class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
+
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
@@ -19,7 +20,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   // Function to animate the Register Now button
   Future<void> _animateButton() async {
-    await Future.delayed(Duration(milliseconds: 800)); // Delay before the button appears
+    await Future.delayed(const Duration(milliseconds: 800)); // Delay before the button appears
     setState(() {
       _buttonVisible = true; // Show the button after the delay
     });
@@ -48,14 +49,14 @@ class _RegisterPageState extends State<RegisterPage> {
                 // Title or other widgets can go here
                 AnimatedOpacity(
                   opacity: _buttonVisible ? 1.0 : 0.0,
-                  duration: Duration(milliseconds: 1000), // Duration of the fade-in animation
+                  duration: const Duration(milliseconds: 1000), // Duration of the fade-in animation
                   child: AnimatedScale(
                     scale: _buttonVisible ? 1.0 : 0.5, // Scale effect
-                    duration: Duration(milliseconds: 1000), // Duration of the scale animation
+                    duration: const Duration(milliseconds: 1000), // Duration of the scale animation
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                        // Button color
-                        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
@@ -66,7 +67,7 @@ class _RegisterPageState extends State<RegisterPage> {
               MaterialPageRoute(builder: (context) => Login()),
             );
                       },
-                      child: Text(
+                      child: const Text(
                         'Register Now',
                         style: TextStyle(
                           color: Colors.black,

@@ -8,7 +8,6 @@ import 'package:machine_test/src/features/login/presentation/widgets/custom_butt
 import 'package:machine_test/src/features/login/presentation/widgets/textformfield_widget.dart';
 import 'package:machine_test/src/utils/constants/app_constants.dart';
 import 'package:machine_test/src/utils/helpers/extentions.dart';
-import 'package:machine_test/src/utils/styles/styles.dart';
 import 'package:machine_test/src/utils/toasters/toast.dart';
 
 class LoginBodyWidget extends StatefulWidget {
@@ -43,6 +42,18 @@ class _LoginBodyWidgetState extends State<LoginBodyWidget> {
   late List<bool> _formFieldVisibility;
   late bool _logoVisible;
 
+  // Dropdown options for the time, gender, and date fields
+  final List<String> _timeOptions = [
+    'AM',
+    'PM',
+  ];
+
+  final List<String> _genderOptions = [
+    'Male',
+    'Female',
+    'Other',
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -64,10 +75,26 @@ class _LoginBodyWidgetState extends State<LoginBodyWidget> {
 
   // Animate logo
   Future<void> _animateLogo() async {
-    await Future.delayed(Duration(milliseconds: 200)); // Delay before logo animation
+    await Future.delayed(const Duration(milliseconds: 200)); // Delay before logo animation
     setState(() {
       _logoVisible = true;
     });
+  }
+
+  // Date Picker function
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime(2101),
+    );
+
+    if (pickedDate != null) {
+      setState(() {
+        widget.datescontroller.text = "${pickedDate.toLocal()}".split(' ')[0]; // Format to yyyy-mm-dd
+      });
+    }
   }
 
   @override
@@ -107,9 +134,6 @@ class _LoginBodyWidgetState extends State<LoginBodyWidget> {
                   fit: BoxFit.cover,  // This will stretch the image to fill the screen
                 ),
               ),
-
-            
-              
 
               // Form Section
               Form(
@@ -163,10 +187,10 @@ class _LoginBodyWidgetState extends State<LoginBodyWidget> {
                             // Logo Animation (Scale and Fade-in)
                             AnimatedOpacity(
                               opacity: _logoVisible ? 1.0 : 0.0,
-                              duration: Duration(milliseconds: 500),
+                              duration: const Duration(milliseconds: 500),
                               child: AnimatedScale(
                                 scale: _logoVisible ? 1.0 : 0.5,
-                                duration: Duration(milliseconds: 500),
+                                duration: const Duration(milliseconds: 500),
                                 child: Center(
                                   child: Image.asset(
                                     'assets/icon.png',  // Your logo file
@@ -177,11 +201,11 @@ class _LoginBodyWidgetState extends State<LoginBodyWidget> {
                               ),
                             ),
 
-                            SizedBox(height: 30),
+                            const SizedBox(height: 30),
 
                             AnimatedOpacity(
                               opacity: _formFieldVisibility[0] ? 1.0 : 0.0,
-                              duration: Duration(milliseconds: 500),
+                              duration: const Duration(milliseconds: 500),
                               child: Row(
                                 children: [
                                   Expanded(
@@ -193,7 +217,7 @@ class _LoginBodyWidgetState extends State<LoginBodyWidget> {
                                       inputType: InputTypes.username,
                                     ),
                                   ),
-                                  SizedBox(width: 10),
+                                  const SizedBox(width: 10),
                                   Expanded(
                                     child: TextFormFieldWidget(
                                       prefixIcon: Icons.phone,
@@ -209,19 +233,41 @@ class _LoginBodyWidgetState extends State<LoginBodyWidget> {
                             20.height,
                             AnimatedOpacity(
                               opacity: _formFieldVisibility[1] ? 1.0 : 0.0,
-                              duration: Duration(milliseconds: 500),
+                              duration: const Duration(milliseconds: 500),
                               child: Row(
                                 children: [
                                   Expanded(
-                                    child: TextFormFieldWidget(
-                                      prefixIcon: Icons.timeline_outlined,
+                                    child: TextFormField(
                                       controller: widget.timescontroller,
-                                      errorText: StringConstants.timeError,
-                                      hintText: StringConstants.visitedTime,
-                                      inputType: InputTypes.username,
+                                      readOnly: true, // Prevent manual input
+                                      decoration: InputDecoration(
+                                        prefixIcon: const Icon(Icons.timeline_outlined),
+                                        hintText: StringConstants.visitedTime,
+                                        suffixIcon: PopupMenuButton<String>(
+                                          icon: const Icon(Icons.arrow_drop_down), // Dropdown icon
+                                          onSelected: (String value) {
+                                            setState(() {
+                                              widget.timescontroller.text = value; // Update text field value
+                                            });
+                                          },
+                                          itemBuilder: (BuildContext context) {
+                                            return _timeOptions.map((String time) {
+                                              return PopupMenuItem<String>(
+                                                value: time,
+                                                child: Text(time),
+                                              );
+                                            }).toList();
+                                          },
+                                        ),
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(8.0),
+                                        ),
+                                        filled: true,
+                                        fillColor: Colors.white.withOpacity(1.0), // Transparent background
+                                      ),
                                     ),
                                   ),
-                                  SizedBox(width: 10),
+                                  const SizedBox(width: 10),
                                   Expanded(
                                     child: TextFormFieldWidget(
                                       controller: widget.purposescontroller,
@@ -236,7 +282,7 @@ class _LoginBodyWidgetState extends State<LoginBodyWidget> {
                             20.height,
                             AnimatedOpacity(
                               opacity: _formFieldVisibility[2] ? 1.0 : 0.0,
-                              duration: Duration(milliseconds: 500),
+                              duration: const Duration(milliseconds: 500),
                               child: Row(
                                 children: [
                                   Expanded(
@@ -248,14 +294,36 @@ class _LoginBodyWidgetState extends State<LoginBodyWidget> {
                                       inputType: InputTypes.username,
                                     ),
                                   ),
-                                  SizedBox(width: 10),
+                                  const SizedBox(width: 10),
                                   Expanded(
-                                    child: TextFormFieldWidget(
-                                      prefixIcon: Icons.person,
+                                    child: TextFormField(
                                       controller: widget.genderscontroller,
-                                      errorText: StringConstants.genderError,
-                                      hintText: StringConstants.gender,
-                                      inputType: InputTypes.username,
+                                      readOnly: true, // Prevent manual input
+                                      decoration: InputDecoration(
+                                        prefixIcon: const Icon(Icons.person),
+                                        hintText: StringConstants.gender,
+                                        suffixIcon: PopupMenuButton<String>(
+                                          icon: const Icon(Icons.arrow_drop_down), // Dropdown icon
+                                          onSelected: (String value) {
+                                            setState(() {
+                                              widget.genderscontroller.text = value; // Update text field value
+                                            });
+                                          },
+                                          itemBuilder: (BuildContext context) {
+                                            return _genderOptions.map((String gender) {
+                                              return PopupMenuItem<String>(
+                                                value: gender,
+                                                child: Text(gender),
+                                              );
+                                            }).toList();
+                                          },
+                                        ),
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(8.0),
+                                        ),
+                                        filled: true,
+                                        fillColor: Colors.white.withOpacity(1.0), // Transparent background
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -264,19 +332,29 @@ class _LoginBodyWidgetState extends State<LoginBodyWidget> {
                             20.height,
                             AnimatedOpacity(
                               opacity: _formFieldVisibility[3] ? 1.0 : 0.0,
-                              duration: Duration(milliseconds: 500),
+                              duration: const Duration(milliseconds: 500),
                               child: Row(
                                 children: [
                                   Expanded(
-                                    child: TextFormFieldWidget(
-                                      prefixIcon: Icons.dataset,
+                                    child: TextFormField(
                                       controller: widget.datescontroller,
-                                      errorText: StringConstants.dateError,
-                                      hintText: StringConstants.visitedDate,
-                                      inputType: InputTypes.username,
+                                      readOnly: true, // Prevent manual input
+                                      decoration: InputDecoration(
+                                        prefixIcon: const Icon(Icons.date_range),
+                                        hintText: StringConstants.visitedDate,
+                                        suffixIcon: IconButton(
+                                          icon: const Icon(Icons.calendar_today), // Calendar icon
+                                          onPressed: () => _selectDate(context), // Open date picker
+                                        ),
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(8.0),
+                                        ),
+                                        filled: true,
+                                        fillColor: Colors.white.withOpacity(1.0), // Transparent background
+                                      ),
                                     ),
                                   ),
-                                  SizedBox(width: 10),
+                                  const SizedBox(width: 10),
                                   Expanded(
                                     child: TextFormFieldWidget(
                                       controller: widget.remarkscontroller,
@@ -293,7 +371,7 @@ class _LoginBodyWidgetState extends State<LoginBodyWidget> {
                             // Submit Button with Animation
                             AnimatedOpacity(
                               opacity: _formFieldVisibility[4] ? 1.0 : 0.0,
-                              duration: Duration(milliseconds: 500),
+                              duration: const Duration(milliseconds: 500),
                               child: Center(
                                 child: PrimaryButton(
                                   isLoading: state is LoginLoadingState,
