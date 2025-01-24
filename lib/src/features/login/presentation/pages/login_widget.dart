@@ -227,9 +227,12 @@ class _LoginBodyWidgetState extends State<LoginBodyWidget> {
                                       inputType: InputTypes.username,
                                     ),
                                   ),
+                                  const SizedBox(width: 10),
                                 ],
+                                
                               ),
                             ),
+                            
                             20.height,
                             AnimatedOpacity(
                               opacity: _formFieldVisibility[1] ? 1.0 : 0.0,
@@ -267,34 +270,7 @@ class _LoginBodyWidgetState extends State<LoginBodyWidget> {
                                       ),
                                     ),
                                   ),
-                                  const SizedBox(width: 10),
-                                  Expanded(
-                                    child: TextFormFieldWidget(
-                                      controller: widget.purposescontroller,
-                                      errorText: StringConstants.purposeError,
-                                      hintText: StringConstants.purpose,
-                                      inputType: InputTypes.username,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            20.height,
-                            AnimatedOpacity(
-                              opacity: _formFieldVisibility[2] ? 1.0 : 0.0,
-                              duration: const Duration(milliseconds: 500),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: TextFormFieldWidget(
-                                      prefixIcon: Icons.email,
-                                      controller: widget.emailscontroller,
-                                      errorText: StringConstants.email,
-                                      hintText: StringConstants.email,
-                                      inputType: InputTypes.username,
-                                    ),
-                                  ),
-                                  const SizedBox(width: 10),
+                              const SizedBox(width: 10),
                                   Expanded(
                                     child: TextFormField(
                                       controller: widget.genderscontroller,
@@ -326,16 +302,28 @@ class _LoginBodyWidgetState extends State<LoginBodyWidget> {
                                       ),
                                     ),
                                   ),
+                               const SizedBox(width: 10),  
                                 ],
                               ),
                             ),
                             20.height,
                             AnimatedOpacity(
-                              opacity: _formFieldVisibility[3] ? 1.0 : 0.0,
+                              opacity: _formFieldVisibility[2] ? 1.0 : 0.0,
                               duration: const Duration(milliseconds: 500),
                               child: Row(
                                 children: [
                                   Expanded(
+                                    child: TextFormFieldWidget(
+                                      prefixIcon: Icons.email,
+                                      controller: widget.emailscontroller,
+                                      errorText: StringConstants.email,
+                                      hintText: StringConstants.email,
+                                      inputType: InputTypes.username,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 10),
+                             
+                               Expanded(
                                     child: TextFormField(
                                       controller: widget.datescontroller,
                                       readOnly: true, // Prevent manual input
@@ -354,6 +342,25 @@ class _LoginBodyWidgetState extends State<LoginBodyWidget> {
                                       ),
                                     ),
                                   ),
+
+                                const SizedBox(width: 10),
+                                ],
+                              ),
+                            ),
+                            20.height,
+                            AnimatedOpacity(
+                              opacity: _formFieldVisibility[3] ? 1.0 : 0.0,
+                              duration: const Duration(milliseconds: 500),
+                              child: Row(
+                                children: [
+                                   Expanded(
+                                    child: TextFormFieldWidget(
+                                      controller: widget.purposescontroller,
+                                      errorText: StringConstants.purposeError,
+                                      hintText: StringConstants.purpose,
+                                      inputType: InputTypes.username,
+                                    ),
+                                  ),
                                   const SizedBox(width: 10),
                                   Expanded(
                                     child: TextFormFieldWidget(
@@ -363,6 +370,7 @@ class _LoginBodyWidgetState extends State<LoginBodyWidget> {
                                       inputType: InputTypes.username,
                                     ),
                                   ),
+                                  const SizedBox(width: 10),
                                 ],
                               ),
                             ),

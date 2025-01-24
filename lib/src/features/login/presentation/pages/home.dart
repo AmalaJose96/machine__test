@@ -30,6 +30,7 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
+        
         children: [
           // Background Image
           Positioned.fill(
@@ -38,11 +39,9 @@ class _RegisterPageState extends State<RegisterPage> {
               fit: BoxFit.cover, // Stretch the image to cover the screen
             ),
           ),
-          
-       
-        
-          // Content: Register Now button with animation
+        // Content: Register Now button with animation
           Center(
+            
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -52,21 +51,31 @@ class _RegisterPageState extends State<RegisterPage> {
                   duration: const Duration(milliseconds: 1000), // Duration of the fade-in animation
                   child: AnimatedScale(
                     scale: _buttonVisible ? 1.0 : 0.5, // Scale effect
-                    duration: const Duration(milliseconds: 1000), // Duration of the scale animation
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                       // Button color
-                        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                      ),
-                      onPressed: () {
-                       Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Login()),
-            );
-                      },
+                    duration: const Duration(milliseconds: 3000), // Duration of the scale animation
+              child: Container(
+  decoration: BoxDecoration(
+    gradient: const LinearGradient(
+      colors: [Color.fromARGB(219, 237, 240, 243), Color.fromARGB(255, 231, 177, 15)], // Gradient colors
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    ),
+    borderRadius: BorderRadius.circular(30), // Match the button's border radius
+  ),
+  child: ElevatedButton(
+    style: ElevatedButton.styleFrom(
+      backgroundColor: Colors.transparent, // Transparent background for the button
+      shadowColor: Colors.transparent, // Remove shadow color
+      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30), // Match the container's border radius
+      ),
+    ),
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Login()),
+      );
+    },
                       child: const Text(
                         'Register Now',
                         style: TextStyle(
@@ -78,7 +87,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
+                ),
               ],
+            
             ),
           ),
         ],

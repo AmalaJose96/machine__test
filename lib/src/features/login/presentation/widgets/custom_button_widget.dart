@@ -24,8 +24,16 @@ class PrimaryButton extends StatelessWidget {
         width: double.infinity,
         padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
         decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 231, 177, 15),
-          borderRadius: BorderRadius.circular(84),
+
+
+          
+    gradient: const LinearGradient(
+      colors: [Color.fromARGB(219, 237, 240, 243), Color.fromARGB(255, 231, 177, 15)], // Gradient colors
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    ),
+    borderRadius: BorderRadius.circular(85), // Match the button's border radius
+  
         ),
         child: isLoading
             ? const Center(
@@ -35,12 +43,13 @@ class PrimaryButton extends StatelessWidget {
             : Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(title, style: AppTextStyles.fBlack16_500),
+                  Text(title, style: AppTextStyles.fBlack32_900),
                   const SizedBox(
                     width: 8,
                   ),
                   const Icon(
                     Icons.arrow_right_alt_rounded,
+                     size: 40,
                     color: AppColors.black,
                   )
                 ],

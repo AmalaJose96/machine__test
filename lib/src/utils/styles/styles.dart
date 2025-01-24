@@ -4,7 +4,7 @@ import 'package:machine_test/src/utils/styles/app_colors.dart';
 class AppTextStyles {
   // -----<32>-----
   static const fBlack32_900 = TextStyle(
-    fontSize: 32,
+    fontSize: 23,
     fontWeight: FontWeight.w900,
     color: AppColors.black,
   );
